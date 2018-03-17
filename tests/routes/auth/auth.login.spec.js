@@ -1,6 +1,6 @@
 import * as chai from 'chai';
 import server from '../../utils/server.mock';
-import User from '../../../app/models/user';
+import User from '../../../app/models/User';
 import UserFactory from '../../factories/user.factory';
 
 const expect = chai.expect;

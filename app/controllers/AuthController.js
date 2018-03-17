@@ -1,5 +1,5 @@
-import BaseController from './base.controller';
-import User from '../models/user';
+import BaseController from './BaseController';
+import User from '../models/User';
 
 class AuthController extends BaseController {
   login = async (req, res, next) => {

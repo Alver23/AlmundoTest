@@ -1,10 +1,19 @@
+// Dependencies
+/* import fs from 'fs';
+import multer from 'multer';
+import * as path from 'path';*/
 import { Router } from 'express';
 
-import MetaController from './controllers/meta.controller';
-import AuthController from './controllers/auth.controller';
-import UsersController from './controllers/users.controller';
-import PostsController from './controllers/posts.controller';
+// const upload = multer({ dest: 'public/images/hotels/' });
 
+// Controllers
+import MetaController from './controllers/meta.controller';
+import AuthController from './controllers/AuthController';
+import UsersController from './controllers/UserController';
+import PostsController from './controllers/PostController';
+import HotelController from './controllers/HotelController';
+
+// Middleware
 import authenticate from './middleware/authenticate';
 import accessControl from './middleware/access-control';
 import errorHandler from './middleware/error-handler';
@@ -30,8 +39,43 @@ routes.post('/posts', authenticate, PostsController.create);
 routes.get('/posts/:id', PostsController._populate, PostsController.fetch);
 routes.delete('/posts/:id', authenticate, PostsController.delete);
 
+// Hotel
+routes.get('/hotels', HotelController.search);
+routes.post('/hotels', HotelController.create);
+routes.put('/hotels/:id', HotelController.update);
+routes.get('/hotels/:id', HotelController.fetch);
+routes.delete('/hotels/:id', HotelController.delete);
+
 // Admin
 routes.get('/admin', accessControl('admin'), MetaController.index);
+
+/* routes.post('/testUpload', function(req, res) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  const images = req.files.images;
+
+  console.log(images);
+
+  images.mv('public/images/hotels/' + images.name, function(err) {
+    if (err)
+      return res.status(500).send(err);
+
+    res.send('File uploaded!');
+  });
+});*/
+
+/* routes.get('/images', async (req, res) => {
+  try {
+    res.setHeader('Content-Type', 'image/jpeg');
+    fs.createReadStream(path.join('public/images/hotels/', '74aabeef23eafe46a3c4e71d382b3ec0')).pipe(res);
+  } catch (err) {
+    res.sendStatus(400);
+  }
+})*/
 
 routes.use(errorHandler);
 
