@@ -23,10 +23,10 @@ const routes = new Router();
 routes.get('/', MetaController.index);
 
 // Authentication
-routes.post('/auth/login', AuthController.login);
+// routes.post('/auth/login', AuthController.login);
 
 // Users
-routes.get('/users', UsersController.search);
+/* routes.get('/users', UsersController.search);
 routes.post('/users', UsersController.create);
 routes.get('/users/me', authenticate, UsersController.fetch);
 routes.put('/users/me', authenticate, UsersController.update);
@@ -37,7 +37,7 @@ routes.get('/users/:username', UsersController._populate, UsersController.fetch)
 routes.get('/posts', PostsController.search);
 routes.post('/posts', authenticate, PostsController.create);
 routes.get('/posts/:id', PostsController._populate, PostsController.fetch);
-routes.delete('/posts/:id', authenticate, PostsController.delete);
+routes.delete('/posts/:id', authenticate, PostsController.delete); */
 
 // Hotel
 routes.get('/hotels', HotelController.search);
@@ -68,14 +68,14 @@ routes.get('/admin', accessControl('admin'), MetaController.index);
   });
 });*/
 
-/* routes.get('/images', async (req, res) => {
+routes.get('/images', async (req, res) => {
   try {
     res.setHeader('Content-Type', 'image/jpeg');
     fs.createReadStream(path.join('public/images/hotels/', '74aabeef23eafe46a3c4e71d382b3ec0')).pipe(res);
   } catch (err) {
     res.sendStatus(400);
   }
-})*/
+});
 
 routes.use(errorHandler);
 
