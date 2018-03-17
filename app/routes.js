@@ -42,9 +42,9 @@ routes.delete('/posts/:id', authenticate, PostsController.delete);
 // Hotel
 routes.get('/hotels', HotelController.search);
 routes.post('/hotels', HotelController.create);
-routes.put('/hotels/:id', HotelController.update);
-routes.get('/hotels/:id', HotelController.fetch);
-routes.delete('/hotels/:id', HotelController.delete);
+// routes.put('/hotels/:id', HotelController.update);
+routes.get('/hotels/:id', HotelController._populate, HotelController.fetch);
+// routes.delete('/hotels/:id', HotelController.delete);
 
 // Admin
 routes.get('/admin', accessControl('admin'), MetaController.index);
