@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import server from '../../utils/server.mock';
-import User from '../../../app/models/user';
-import Post from '../../../app/models/post';
+import User from '../../../app/models/User';
+import Post from '../../../app/models/Post';
 import UserFactory from '../../factories/user.factory';
 import PostFactory from '../../factories/post.factory';
 

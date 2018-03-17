@@ -1,3 +1,4 @@
+// Dependencies
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -5,10 +6,16 @@ import methodOverride from 'method-override';
 import morgan from 'morgan';
 import helmet from 'helmet';
 
+import fileUpload from 'express-fileupload';
+
 import routes from './routes';
 import Constants from './config/constants';
 
 const app = express();
+
+
+// default options
+app.use(fileUpload());
 
 // Helmet helps you secure your Express apps by setting various HTTP headers
 // https://github.com/helmetjs/helmet

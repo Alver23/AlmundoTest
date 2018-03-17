@@ -1,4 +1,4 @@
-import BaseController from './base.controller';
+import BaseController from './BaseController';
 import Constants from '../config/constants';
 
 class MetaController extends BaseController {
