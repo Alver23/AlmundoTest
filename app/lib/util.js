@@ -19,7 +19,6 @@ export function uploads(images) {
 function saveImagePath(image) {
   return image.mv(`${UPLOAD_PATH}${image.name}`, function(err) {
     if (err) return false;
-
     return true;
   });
 }
@@ -29,6 +28,6 @@ function processImage(image) {
   return {
     name: image.name,
     mimetype: image.mimetype,
-    path: `${UPLOAD_PATH}${image.name}`,
+    path: `images/hotels/${image.name}`,
   };
 }

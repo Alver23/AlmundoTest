@@ -41,7 +41,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride());
 
 // Mount public routes
-app.use('/public', express.static(`${__dirname}/public`));
+app.use(express.static('public'));
+// app.use('public', express.static(`${__dirname}/public`));
 
 // Mount API routes
 app.use(Constants.apiPrefix, routes);
