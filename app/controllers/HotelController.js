@@ -41,9 +41,20 @@ class HotelController extends BaseController {
   }
 
   search = async (req, res, next) => {
+    const queryString = (req.query && Object.keys(req.query).length > 0) ? req.query : null;
+    let filters = {};
+    if (queryString) {
+      filters = {
+        ...queryString,
+      };
+
+      if (filters.name) {
+        filters.name = new RegExp(filters.name, 'i');
+      }
+    }
     try {
       // @TODO Add pagination
-      res.json(await Hotel.find());
+      res.json(await Hotel.find(filters));
     } catch(err) {
       next(err);
     }
