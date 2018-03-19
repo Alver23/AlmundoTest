@@ -1,3 +1,4 @@
+// Dependencies
 import path from 'path';
 import merge from 'lodash/merge';
 

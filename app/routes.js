@@ -18,7 +18,7 @@ routes.get('/hotels', HotelController.search);
 routes.post('/hotels', HotelController.create);
 routes.put('/hotels/:id', HotelController.update);
 routes.get('/hotel/:id', HotelController._populate, HotelController.fetch);
-routes.delete('/hotels/:id', HotelController.delete);
+routes.delete('/hotel/:id', HotelController.delete);
 
 
 routes.use(errorHandler);
