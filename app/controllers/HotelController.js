@@ -3,8 +3,6 @@ import Hotel from '../models/Hotel';
 
 // Controllers
 import BaseController from './BaseController';
-import User from '../models/User';
-import Post from '../models/Post';
 
 // Utils
 import { uploads } from '../lib/util';
@@ -41,9 +39,20 @@ class HotelController extends BaseController {
   }
 
   search = async (req, res, next) => {
+    const queryString = (req.query && Object.keys(req.query).length > 0) ? req.query : null;
+    let filters = {};
+    if (queryString) {
+      filters = {
+        ...queryString,
+      };
+
+      if (filters.name) {
+        filters.name = new RegExp(filters.name, 'i');
+      }
+    }
     try {
       // @TODO Add pagination
-      res.json(await Hotel.find());
+      res.json(await Hotel.find(filters));
     } catch(err) {
       next(err);
     }
@@ -92,23 +101,42 @@ class HotelController extends BaseController {
   }
 
   update = async (req, res, next) => {
-    const newAttributes = this.filterParams(req.body, this.whitelist);
-    const updatedHotel = Object.assign({}, req.id, newAttributes);
+    const { id } = req.params;
+    const params = this.filterParams(req.body, this.whitelist);
+
+    const files = (req.files && req.files.images) ? req.files.images : false;
+    let images = [];
+
+    if (typeof params.amenities == 'string') {
+      params.amenities = JSON.parse(params.amenities);
+    }
+
+    if (files) {
+      images = uploads(files);
+    }
+
+    const newAttributes = {
+      images,
+      ...params,
+    };
+
+    const conditions = { _id: id };
 
     try {
-      res.status(200).json(await updatedHotel.save());
+      res.status(200).json(await Hotel.update(conditions, newAttributes));
     } catch (err) {
       next(err);
     }
   }
 
   delete = async (req, res, next) => {
-    if (!req.id) {
+    const { id } = req.params;
+    if (!id) {
       return res.sendStatus(403);
     }
 
     try {
-      await req.id.remove();
+      await Hotel.remove({ _id: id });
       res.sendStatus(204);
     } catch(err) {
       next(err);

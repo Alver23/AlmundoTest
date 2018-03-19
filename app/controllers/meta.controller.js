@@ -1,4 +1,7 @@
+// Models
 import BaseController from './BaseController';
+
+// Config
 import Constants from '../config/constants';
 
 class MetaController extends BaseController {

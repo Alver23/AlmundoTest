@@ -1,4 +1,7 @@
+// Dependencies
 import mongoose from 'mongoose';
+
+// Config
 import Constants from './config/constants';
 
 // Use native promises

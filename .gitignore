@@ -5,3 +5,5 @@ build
 coverage
 node_modules
 .env
+public/images/hotels
+.idea
