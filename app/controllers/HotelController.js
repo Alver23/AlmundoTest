@@ -3,8 +3,6 @@ import Hotel from '../models/Hotel';
 
 // Controllers
 import BaseController from './BaseController';
-import User from '../models/User';
-import Post from '../models/Post';
 
 // Utils
 import { uploads } from '../lib/util';
